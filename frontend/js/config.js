@@ -6,7 +6,7 @@
  * Change API_BASE_URL to point to your deployed backend in production.
  */
 
-export const API_BASE_URL = "http://localhost:8000";
+export const API_BASE_URL = "https://swasthya-setu-backend-production-42e6.up.railway.app";
 
 /** Default language to use when detection hasn't run yet */
 export const DEFAULT_LANGUAGE = "en";
