@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: swasthya-setu-backend
+    env: python
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: HUGGINGFACE_API_KEY
+        sync: false

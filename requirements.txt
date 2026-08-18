@@ -1,0 +1,4 @@
+# SwasthyaSetu AI — Root Requirements (mirrors backend/requirements.txt)
+# This root-level file is provided for convenience.
+# See backend/requirements.txt for the authoritative dependency list.
+-r backend/requirements.txt

@@ -1,0 +1,44 @@
+# SwasthyaSetu AI — Python Dependencies
+# Backend requirements for the RAG-based multilingual health information assistant
+
+# ── Web Framework ──────────────────────────────────────────────────────────────
+fastapi>=0.111.0
+uvicorn[standard]>=0.30.1
+python-multipart==0.0.9         # Required for file upload endpoints in FastAPI
+
+# ── LangChain Ecosystem ────────────────────────────────────────────────────────
+langchain>=0.2.11
+langchain-community>=0.2.10
+langchain-chroma>=0.1.2
+langchain-huggingface>=0.0.3
+
+# ── Vector Database ────────────────────────────────────────────────────────────
+chromadb>=0.5.3
+
+# ── Embeddings (BGE-M3 multilingual model via HuggingFace) ────────────────────
+sentence-transformers>=3.0.1    # Backend for HuggingFaceEmbeddings
+torch>=2.0.0                    # Required by sentence-transformers
+transformers>=4.40.0
+
+# ── Document Parsing ───────────────────────────────────────────────────────────
+pypdf>=4.2.0                    # Used by PyPDFLoader
+
+# ── Language Detection ─────────────────────────────────────────────────────────
+langdetect==1.0.9               # Fallback language detector
+
+# ── HTTP Client (for HuggingFace Inference API calls) ────────────────────────
+httpx==0.27.0
+requests==2.32.3
+
+# ── HuggingFace Hub (model discovery + inference client) ──────────────────────
+huggingface_hub==0.23.4          # huggingface_hub.InferenceClient for STT/TTS
+
+# ── Environment Management ────────────────────────────────────────────────────
+python-dotenv==1.0.1
+
+# ── Data Handling ─────────────────────────────────────────────────────────────
+pydantic>=2.7.4                 # Included with FastAPI, pinned for compatibility
+numpy>=1.24.0                   # Required by sentence-transformers
+
+# ── Utilities ─────────────────────────────────────────────────────────────────
+tqdm==4.66.4                    # Progress bars for ingest.py

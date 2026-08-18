@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="About SwasthyaSetu AI — Architecture, safety guidelines, government scheme alignment, and SIH submission information for this multilingual health information assistant.">
+    <title>About — SwasthyaSetu AI</title>
+
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/responsive.css">
+
+    <style>
+        .about-content {
+            max-width: var(--max-width-content);
+            margin: 0 auto;
+            padding: var(--space-8) var(--space-6);
+        }
+
+        .about-hero {
+            text-align: center;
+            padding: var(--space-12) var(--space-6);
+            background: linear-gradient(135deg, var(--color-primary-50), var(--color-success-50));
+            border-radius: var(--radius-2xl);
+            margin-bottom: var(--space-10);
+        }
+
+        .about-hero h1 {
+            font-size: var(--font-size-3xl);
+            font-weight: var(--font-weight-bold);
+            color: var(--color-primary-700);
+            margin-bottom: var(--space-4);
+        }
+
+        .about-hero p {
+            font-size: var(--font-size-md);
+            color: var(--color-text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: var(--line-height-relaxed);
+        }
+
+        .about-section {
+            margin-bottom: var(--space-10);
+        }
+
+        .about-section h2 {
+            font-size: var(--font-size-xl);
+            font-weight: var(--font-weight-bold);
+            color: var(--color-primary-700);
+            margin-bottom: var(--space-4);
+            padding-bottom: var(--space-2);
+            border-bottom: 2px solid var(--color-primary-200);
+        }
+
+        .about-section h3 {
+            font-size: var(--font-size-md);
+            font-weight: var(--font-weight-semibold);
+            color: var(--color-text-primary);
+            margin: var(--space-4) 0 var(--space-2);
+        }
+
+        .about-section p, .about-section li {
+            color: var(--color-text-secondary);
+            line-height: var(--line-height-relaxed);
+            margin-bottom: var(--space-2);
+        }
+
+        .about-section ul, .about-section ol {
+            padding-left: var(--space-6);
+            margin-bottom: var(--space-4);
+        }
+
+        .scheme-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--space-4);
+            margin-top: var(--space-4);
+        }
+
+        .scheme-card {
+            background: var(--color-neutral-0);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-xl);
+            padding: var(--space-5);
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .scheme-card-icon { font-size: 2rem; margin-bottom: var(--space-2); }
+        .scheme-card-title { font-size: var(--font-size-sm); font-weight: var(--font-weight-semibold); color: var(--color-primary-700); }
+        .scheme-card-desc { font-size: var(--font-size-xs); color: var(--color-text-muted); margin-top: var(--space-1); }
+
+        .safety-item {
+            display: flex;
+            gap: var(--space-3);
+            padding: var(--space-4);
+            background: var(--color-neutral-0);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-lg);
+            margin-bottom: var(--space-3);
+        }
+
+        .safety-item-icon { font-size: 1.5rem; flex-shrink: 0; }
+
+        .disclaimer-box {
+            background: var(--color-warning-100);
+            border: 2px solid var(--color-warning-400);
+            border-radius: var(--radius-xl);
+            padding: var(--space-6);
+            margin-bottom: var(--space-8);
+        }
+
+        .disclaimer-box h2 { color: var(--color-warning-600); border-color: var(--color-warning-400); }
+
+        .tech-stack-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: var(--space-3);
+        }
+
+        .tech-badge {
+            background: var(--color-primary-50);
+            border: 1px solid var(--color-primary-200);
+            border-radius: var(--radius-lg);
+            padding: var(--space-3) var(--space-4);
+            font-size: var(--font-size-sm);
+            font-weight: var(--font-weight-medium);
+            color: var(--color-primary-700);
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Disclaimer banner -->
+<div class="disclaimer-banner" role="note">
+    <span class="disclaimer-icon" aria-hidden="true">ℹ️</span>
+    <span>
+        This provides <strong>general health information only</strong>, not medical diagnosis.
+        For emergencies call
+        <a href="tel:108" class="emergency-link">108</a>.
+    </span>
+</div>
+
+<!-- Navbar -->
+<nav class="navbar" role="navigation" aria-label="Main navigation">
+    <a href="index.html" class="navbar-brand" aria-label="SwasthyaSetu AI Home">
+        <div class="navbar-logo-icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round">
+                <path d="M12 2v20M2 12h20"/>
+                <rect x="6" y="6" width="12" height="12" rx="2" fill="rgba(255,255,255,0.2)" stroke="white" stroke-width="1.5"/>
+            </svg>
+        </div>
+        <div class="navbar-logo-text">
+            <span class="navbar-app-name">SwasthyaSetu AI</span>
+            <span class="navbar-app-tagline">Multilingual Health Assistant</span>
+        </div>
+    </a>
+    <div class="navbar-controls">
+        <div class="nav-links" role="list">
+            <a href="index.html" class="nav-link" role="listitem">Chat</a>
+            <a href="about.html" class="nav-link active" role="listitem" aria-current="page">About</a>
+        </div>
+        <a href="tel:108" class="navbar-emergency-pill" id="about-emergency-link">
+            <span class="pill-dot" aria-hidden="true"></span>
+            <span class="pill-text">Emergency: 108</span>
+        </a>
+    </div>
+</nav>
+
+<!-- Main content -->
+<main role="main" style="overflow-y:auto;flex:1">
+    <div class="about-content">
+
+        <!-- Hero -->
+        <div class="about-hero">
+            <div style="font-size:3rem;margin-bottom:var(--space-4)" aria-hidden="true">🏥</div>
+            <h1>About SwasthyaSetu AI</h1>
+            <p>
+                A RAG-based multilingual health information assistant built for Indian citizens.
+                Powered by advanced AI — designed with safety, accessibility, and trust as core principles.
+            </p>
+            <div style="margin-top:var(--space-6)">
+                <a href="index.html" class="btn btn-primary" style="display:inline-flex">
+                    Start Chatting →
+                </a>
+            </div>
+        </div>
+
+        <!-- IMPORTANT DISCLAIMER -->
+        <div class="disclaimer-box">
+            <h2>⚠️ Critical Disclaimer</h2>
+            <p>
+                <strong>SwasthyaSetu AI is a health INFORMATION and EDUCATION tool, NOT a medical diagnostic system.</strong>
+                It is designed to provide general health awareness and help users understand publicly available
+                health information from WHO, ICMR, and the National Health Portal of India.
+            </p>
+            <p style="margin-top:var(--space-3)">
+                <strong>This tool should never be used to:</strong>
+            </p>
+            <ul>
+                <li>Diagnose any medical condition</li>
+                <li>Determine specific medication dosages</li>
+                <li>Replace consultation with a qualified healthcare professional</li>
+                <li>Make emergency medical decisions (always call 108 for emergencies)</li>
+            </ul>
+        </div>
+
+        <!-- What It Does -->
+        <div class="about-section">
+            <h2>What SwasthyaSetu AI Does</h2>
+            <p>
+                SwasthyaSetu (meaning "health bridge" in Sanskrit) connects Indian citizens with reliable,
+                multilingual health information from authoritative government and international health sources.
+            </p>
+            <ul>
+                <li>Answers health questions in 10+ Indian languages (Hindi, Tamil, Telugu, Bengali, Marathi, Gujarati, Kannada, Malayalam, Punjabi, and English)</li>
+                <li>Provides information about disease symptoms, prevention strategies, and general health guidance</li>
+                <li>Explains government health schemes (Ayushman Bharat, PMJAY, eSanjeevani, Jan Aushadhi)</li>
+                <li>Detects emergency situations and immediately provides helpline numbers (108, KIRAN, Women's Helpline)</li>
+                <li>Supports voice input and output in Indian languages via Bhashini (Government of India)</li>
+                <li>Helps locate nearby hospitals and Primary Health Centres (PHCs)</li>
+            </ul>
+        </div>
+
+        <!-- Safety Guardrails -->
+        <div class="about-section">
+            <h2>🛡️ Safety Guardrails</h2>
+            <p>Every interaction is protected by multiple layers of safety mechanisms:</p>
+
+            <div class="safety-item">
+                <div class="safety-item-icon">🚨</div>
+                <div>
+                    <strong>Emergency Detection (Rule-Based)</strong>
+                    <p>A deterministic keyword matching system scans every query BEFORE any AI processing. If emergency keywords are detected (chest pain, suicidal ideation, severe bleeding, etc.), the system immediately returns helpline numbers WITHOUT calling the AI model — ensuring the fastest possible safety response.</p>
+                </div>
+            </div>
+
+            <div class="safety-item">
+                <div class="safety-item-icon">🚫</div>
+                <div>
+                    <strong>No Dosage Information</strong>
+                    <p>The AI is explicitly instructed to NEVER provide specific medication dosages, drug quantities, or treatment schedules. Users are always redirected to consult a qualified doctor or pharmacist.</p>
+                </div>
+            </div>
+
+            <div class="safety-item">
+                <div class="safety-item-icon">📚</div>
+                <div>
+                    <strong>Knowledge Boundary Enforcement</strong>
+                    <p>The AI is instructed to use ONLY information from the retrieved health knowledge base (WHO, ICMR, NHP India). When information is insufficient, it explicitly says so instead of generating unsupported information.</p>
+                </div>
+            </div>
+
+            <div class="safety-item">
+                <div class="safety-item-icon">⚕️</div>
+                <div>
+                    <strong>Mandatory Disclaimers</strong>
+                    <p>Every AI response includes a reminder that the information is general and not a medical diagnosis. A permanent disclaimer banner is always visible on the chat interface.</p>
+                </div>
+            </div>
+
+            <div class="safety-item">
+                <div class="safety-item-icon">💙</div>
+                <div>
+                    <strong>Mental Health Sensitivity</strong>
+                    <p>The system detects expressions of mental health crisis or suicidal ideation and responds with compassion and the KIRAN Helpline (1800-599-0019), not with AI-generated mental health advice.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Government Scheme Alignment -->
+        <div class="about-section">
+            <h2>🏛️ Government Scheme Alignment</h2>
+            <p>SwasthyaSetu AI is designed to complement India's flagship digital health initiatives:</p>
+
+            <div class="scheme-grid">
+                <div class="scheme-card">
+                    <div class="scheme-card-icon">🏥</div>
+                    <div class="scheme-card-title">Ayushman Bharat Digital Mission (ABDM)</div>
+                    <div class="scheme-card-desc">Supports health information access as part of India's digital health ecosystem</div>
+                </div>
+                <div class="scheme-card">
+                    <div class="scheme-card-icon">💻</div>
+                    <div class="scheme-card-title">eSanjeevani</div>
+                    <div class="scheme-card-desc">Recommends free teleconsultation when users need professional guidance</div>
+                </div>
+                <div class="scheme-card">
+                    <div class="scheme-card-icon">🌐</div>
+                    <div class="scheme-card-title">HuggingFace Inference API</div>
+                    <div class="scheme-card-desc">Uses Whisper large-v3 for Indian language speech recognition and MMS-TTS for text-to-speech output</div>
+                </div>
+                <div class="scheme-card">
+                    <div class="scheme-card-icon">💊</div>
+                    <div class="scheme-card-title">Jan Aushadhi</div>
+                    <div class="scheme-card-desc">Informs users about affordable generic medicines</div>
+                </div>
+                <div class="scheme-card">
+                    <div class="scheme-card-icon">🎯</div>
+                    <div class="scheme-card-title">National Health Mission (NHM)</div>
+                    <div class="scheme-card-desc">Builds on NHM's health awareness objectives</div>
+                </div>
+                <div class="scheme-card">
+                    <div class="scheme-card-icon">📋</div>
+                    <div class="scheme-card-title">National Digital Health Mission</div>
+                    <div class="scheme-card-desc">Complements NDHM's vision of digital health for all Indians</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Technology Stack -->
+        <div class="about-section">
+            <h2>⚙️ Technology Stack</h2>
+            <p>Built with production-grade open-source and government-supported technology:</p>
+
+            <h3>Backend</h3>
+            <div class="tech-stack-grid">
+                <div class="tech-badge">Python 3.10+</div>
+                <div class="tech-badge">FastAPI</div>
+                <div class="tech-badge">LangChain</div>
+                <div class="tech-badge">Mistral-7B-Instruct (via HuggingFace)</div>
+                <div class="tech-badge">ChromaDB</div>
+                <div class="tech-badge">BAAI/bge-m3</div>
+                <div class="tech-badge">HuggingFace Whisper v3</div>
+                <div class="tech-badge">Facebook MMS-TTS</div>
+                <div class="tech-badge">FastText</div>
+            </div>
+
+            <h3>Frontend</h3>
+            <div class="tech-stack-grid">
+                <div class="tech-badge">HTML5</div>
+                <div class="tech-badge">CSS3</div>
+                <div class="tech-badge">Vanilla JS (ES6)</div>
+                <div class="tech-badge">Web Audio API</div>
+                <div class="tech-badge">Geolocation API</div>
+                <div class="tech-badge">MediaRecorder API</div>
+            </div>
+
+            <h3>Key Design Choices</h3>
+            <ul>
+                <li><strong>BAAI/bge-m3 embeddings:</strong> Enables cross-lingual retrieval — a Hindi query can match English source documents without translation, because both are embedded in the same semantic vector space.</li>
+                <li><strong>Deterministic emergency detection:</strong> Rule-based matching (no LLM) for emergency keywords — auditable, instant, and fail-safe.</li>
+                <li><strong>RAG architecture:</strong> Grounds all responses in retrieved documents, preventing hallucination and ensuring factual accuracy.</li>
+                <li><strong>openai/whisper-large-v3 (HuggingFace):</strong> Multilingual STT that handles Hindi, Tamil, Telugu, Bengali and other Indian languages without a dedicated ASR per language.</li>
+                <li><strong>facebook/mms-tts (HuggingFace):</strong> MMS (Massively Multilingual Speech) TTS covers 22+ Indian languages with per-language model endpoints.</li>
+                <li><strong>Light healthcare UI:</strong> Deliberately chosen over dark mode — healthcare UX research shows light interfaces build more trust for medical information.</li>
+            </ul>
+        </div>
+
+        <!-- SDG Alignment -->
+        <div class="about-section">
+            <h2>🌍 UN Sustainable Development Goal Alignment</h2>
+            <ul>
+                <li><strong>SDG 3 — Good Health and Well-being:</strong> Democratising access to quality health information for all Indians, regardless of language, literacy, or location.</li>
+                <li><strong>SDG 9 — Industry, Innovation, Infrastructure:</strong> Building AI-powered digital health infrastructure accessible via basic smartphones.</li>
+                <li><strong>SDG 10 — Reduced Inequalities:</strong> Bridging the health information gap between urban and rural citizens through multilingual support.</li>
+            </ul>
+        </div>
+
+        <!-- Built for SIH -->
+        <div class="about-section">
+            <h2>🏆 Smart India Hackathon 2024</h2>
+            <p>
+                SwasthyaSetu AI was developed for the Smart India Hackathon (SIH) under the
+                <strong>MedTech/HealthTech</strong> theme. It addresses the challenge of
+                providing accurate, multilingual health information to India's 1.4 billion citizens,
+                particularly in rural and semi-urban areas where healthcare access is limited.
+            </p>
+            <p style="margin-top:var(--space-3)">
+                <a href="index.html" class="btn btn-primary" style="display:inline-flex">
+                    Try SwasthyaSetu AI →
+                </a>
+            </p>
+        </div>
+
+    </div>
+</main>
+
+</body>
+</html>

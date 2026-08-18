@@ -1,0 +1,214 @@
+/* frontend/css/responsive.css - Mobile-first responsive styles */
+
+/*
+ * Mobile-first design rationale:
+ * Target users are Indian citizens in rural/semi-urban areas who primarily
+ * access services via smartphones, often low-end devices with small screens.
+ * We design for mobile FIRST, then progressively enhance for larger screens.
+ */
+
+/* ── Base mobile styles (< 640px) ───────────────────────────── */
+
+/* Sidebar hidden by default on mobile */
+.sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    z-index: var(--z-overlay);
+    transform: translateX(-100%);
+    box-shadow: var(--shadow-xl);
+}
+
+.sidebar.open {
+    transform: translateX(0);
+}
+
+/* Sidebar overlay for mobile */
+.sidebar-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgb(0 0 0 / 0.5);
+    z-index: calc(var(--z-overlay) - 1);
+}
+
+.sidebar-overlay.visible { display: block; }
+
+/* Hamburger always visible on mobile */
+.hamburger-btn { display: flex; }
+
+/* Full-width message bubbles on mobile */
+.message-wrapper { max-width: 95%; }
+
+/* Suggested prompts: 1 column on mobile */
+.suggested-prompts { grid-template-columns: 1fr; }
+
+/* Disclaimer: smaller on mobile */
+.disclaimer-banner {
+    font-size: 0.7rem;
+    padding: var(--space-2) var(--space-3);
+    min-height: 40px;
+}
+
+/* Navbar: hide tagline on small screens */
+.navbar-app-tagline { display: none; }
+
+/* Emergency pill: number only on mobile */
+.navbar-emergency-pill .pill-text { display: none; }
+
+/* Nav links: hide on mobile */
+.nav-links { display: none; }
+
+/* Chat input: full width padding adjustments */
+.chat-input-area { padding: var(--space-3); }
+
+.messages-area { padding: var(--space-4) var(--space-3); }
+
+/* Helpline button: larger tap target on mobile */
+.helpline-btn {
+    width: 100%;
+    justify-content: center;
+    padding: var(--space-5);
+    font-size: var(--font-size-2xl);
+    letter-spacing: 0.08em;
+}
+
+/* Hospital cards: full width */
+.hospital-result-card { width: 100%; }
+
+/* ── Small tablets (≥ 480px) ─────────────────────────────────── */
+@media (min-width: 480px) {
+    .disclaimer-banner { font-size: var(--font-size-sm); }
+    .navbar-app-tagline { display: block; }
+    .navbar-emergency-pill .pill-text { display: inline; }
+    .suggested-prompts { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* ── Tablets (≥ 640px) ───────────────────────────────────────── */
+@media (min-width: 640px) {
+    .message-wrapper { max-width: 85%; }
+
+    /* Sidebar: show as part of layout (not overlay) on tablet+ */
+    .sidebar {
+        position: relative;
+        transform: none;
+        box-shadow: none;
+    }
+
+    .sidebar-overlay { display: none !important; }
+    .hamburger-btn { display: none; }
+
+    .nav-links { display: flex; }
+
+    .messages-area { padding: var(--space-6); }
+    .chat-input-area { padding: var(--space-4) var(--space-6); }
+
+    /* Helpline button: inline, not full-width */
+    .helpline-btn {
+        width: auto;
+        padding: var(--space-4) var(--space-6);
+    }
+}
+
+/* ── Laptops (≥ 1024px) ──────────────────────────────────────── */
+@media (min-width: 1024px) {
+    .message-wrapper { max-width: 78%; }
+
+    .welcome-title { font-size: var(--font-size-3xl); }
+
+    .suggested-prompts {
+        grid-template-columns: repeat(2, 1fr);
+        max-width: 640px;
+    }
+
+    /* Larger chat input */
+    .chat-textarea { min-height: 50px; }
+}
+
+/* ── Large screens (≥ 1280px) ────────────────────────────────── */
+@media (min-width: 1280px) {
+    .message-wrapper { max-width: 72%; }
+}
+
+/* ── Dark mode media query support ───────────────────────────── */
+/*
+ * NOTE: We intentionally do NOT implement dark mode for SwasthyaSetu AI.
+ * Healthcare information UX research shows light interfaces are more
+ * readable and trustworthy for health information — especially for users
+ * with lower literacy or using low-quality screens.
+ * We force light mode to maintain accessibility consistency.
+ */
+@media (prefers-color-scheme: dark) {
+    /* Override to keep light theme regardless of OS dark mode setting */
+    :root {
+        color-scheme: light;
+    }
+}
+
+/* ── High contrast mode support ──────────────────────────────── */
+@media (prefers-contrast: high) {
+    :root {
+        --color-border: #000000;
+        --color-text-secondary: var(--color-neutral-700);
+        --color-text-muted: var(--color-neutral-600);
+    }
+
+    .message-bubble,
+    .card { border-width: 2px; }
+}
+
+/* ── Reduced motion ──────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    /* Emergency elements should still pulse even with reduced motion
+       (safety-critical indicator) — but at reduced intensity */
+    .emergency-bubble::before {
+        animation: none;
+        background: var(--color-emergency-500);
+    }
+
+    .helpline-btn {
+        animation: none;
+        box-shadow: 0 0 0 3px var(--color-emergency-300);
+    }
+}
+
+/* ── Print styles ────────────────────────────────────────────── */
+@media print {
+    .sidebar,
+    .chat-input-area,
+    .mic-btn,
+    .send-btn,
+    .hamburger-btn,
+    .disclaimer-banner,
+    .navbar { display: none; }
+
+    .messages-area {
+        overflow: visible;
+        height: auto;
+    }
+
+    .message-bubble {
+        box-shadow: none;
+        border: 1px solid #ccc;
+    }
+
+    /* Always print emergency messages prominently */
+    .emergency-bubble {
+        border: 3px solid black;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+}
+
+/* ── Landscape phone orientation ──────────────────────────────── */
+@media (max-width: 896px) and (orientation: landscape) {
+    .disclaimer-banner { display: none; }
+    .messages-area { padding: var(--space-3); }
+}

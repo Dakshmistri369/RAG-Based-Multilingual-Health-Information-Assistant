@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta name="description" content="SwasthyaSetu AI — Free multilingual health information assistant for Indian citizens. Ask health questions in Hindi, Tamil, Telugu, Bengali, and more. Not a diagnostic tool.">
+    <meta name="keywords" content="health information, multilingual, Hindi, Tamil, Ayushman Bharat, eSanjeevani, India health, AI health assistant">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="SwasthyaSetu AI — Multilingual Health Information Assistant">
+    <meta property="og:description" content="Free AI-powered health information in 10+ Indian languages. Powered by RAG technology and Bhashini voice support.">
+    <meta property="og:type" content="website">
+
+    <!-- Structured data: HealthTopicContent (schema.org) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "SwasthyaSetu AI",
+        "description": "Multilingual health information assistant for Indian citizens. Provides general health education — not medical diagnosis.",
+        "applicationCategory": "HealthApplication",
+        "operatingSystem": "Any",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "INR" }
+    }
+    </script>
+
+    <title>SwasthyaSetu AI — Multilingual Health Information Assistant</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/chat.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+<!-- ============================================================
+     DISCLAIMER BANNER (always visible, non-dismissible)
+     CRITICAL: This must remain visible at all times.
+     ============================================================ -->
+<div class="disclaimer-banner" role="note" aria-label="Important disclaimer">
+    <span class="disclaimer-icon" aria-hidden="true">ℹ️</span>
+    <span>
+        This provides <strong>general health information only</strong>, not medical diagnosis.
+        For emergencies call
+        <a href="tel:108" class="emergency-link" aria-label="Call 108 national emergency number">108</a>
+        immediately.
+    </span>
+</div>
+
+<!-- ============================================================
+     NAVIGATION BAR
+     ============================================================ -->
+<nav class="navbar" role="navigation" aria-label="Main navigation">
+    <!-- Brand -->
+    <a href="index.html" class="navbar-brand" aria-label="SwasthyaSetu AI Home">
+        <div class="navbar-logo-icon" aria-hidden="true">
+            <!-- Inline health cross SVG logo -->
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round">
+                <path d="M12 2v20M2 12h20"/>
+                <rect x="6" y="6" width="12" height="12" rx="2" fill="rgba(255,255,255,0.2)" stroke="white" stroke-width="1.5"/>
+            </svg>
+        </div>
+        <div class="navbar-logo-text">
+            <span class="navbar-app-name">SwasthyaSetu AI</span>
+            <span class="navbar-app-tagline">Multilingual Health Assistant</span>
+        </div>
+    </a>
+
+    <!-- Right controls -->
+    <div class="navbar-controls">
+        <!-- Desktop nav links -->
+        <div class="nav-links" role="list">
+            <a href="index.html" class="nav-link active" role="listitem" aria-current="page">Chat</a>
+            <a href="about.html" class="nav-link" role="listitem">About</a>
+        </div>
+
+        <!-- Emergency hotline pill -->
+        <a href="tel:108"
+           class="navbar-emergency-pill"
+           aria-label="Emergency: Call 108"
+           id="navbar-emergency-link">
+            <span class="pill-dot" aria-hidden="true"></span>
+            <span class="pill-text">Emergency: 108</span>
+        </a>
+
+        <!-- Hamburger (mobile only) -->
+        <button class="hamburger-btn"
+                id="hamburger-btn"
+                aria-label="Toggle menu"
+                aria-expanded="false"
+                aria-controls="sidebar">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+</nav>
+
+<!-- ============================================================
+     MAIN LAYOUT: SIDEBAR + CHAT
+     ============================================================ -->
+<div class="main-container">
+
+    <!-- ── Sidebar overlay (mobile) ── -->
+    <div class="sidebar-overlay" id="sidebar-overlay" role="presentation"></div>
+
+    <!-- ── SIDEBAR ──────────────────────────────────────────── -->
+    <aside class="sidebar" id="sidebar" aria-label="Settings and tools">
+
+        <!-- Language selector -->
+        <div class="sidebar-section">
+            <div class="sidebar-section-title">Response Language</div>
+            <div style="position:relative">
+                <select id="language-select"
+                        aria-label="Select language"
+                        style="width:100%;padding:8px 12px;border:1px solid var(--color-border);
+                               border-radius:var(--radius-lg);font-size:var(--font-size-sm);
+                               background:white;color:var(--color-text-primary);cursor:pointer;
+                               appearance:none;-webkit-appearance:none;">
+                    <!-- Populated by languageSelector.js -->
+                </select>
+                <div style="position:absolute;right:10px;top:50%;transform:translateY(-50%);
+                            pointer-events:none;color:var(--color-text-muted)">▾</div>
+            </div>
+            <div style="margin-top:6px;font-size:var(--font-size-xs);color:var(--color-text-muted)">
+                Detected: <span id="detected-language" style="font-weight:600">Auto</span>
+            </div>
+        </div>
+
+        <!-- Category filter -->
+        <div class="sidebar-section">
+            <div class="sidebar-section-title">Topic Filter</div>
+            <select id="category-select"
+                    aria-label="Filter by health topic"
+                    style="width:100%;padding:8px 12px;border:1px solid var(--color-border);
+                           border-radius:var(--radius-lg);font-size:var(--font-size-sm);
+                           background:white;color:var(--color-text-primary);cursor:pointer;
+                           appearance:none;-webkit-appearance:none;">
+                <option value="">🌐 All Topics</option>
+                <option value="symptoms">🤒 Symptoms</option>
+                <option value="prevention">🛡️ Prevention</option>
+                <option value="treatment_general">💊 Treatment Info</option>
+                <option value="scheme_info">🏥 Government Schemes</option>
+                <option value="mental_health">🧠 Mental Health</option>
+                <option value="maternal_child_health">👶 Maternal &amp; Child Health</option>
+            </select>
+        </div>
+
+        <!-- Hospital finder -->
+        <div class="sidebar-section">
+            <div class="sidebar-section-title">Nearest Health Facility</div>
+            <button id="find-hospitals-btn"
+                    class="btn btn-secondary w-full"
+                    aria-label="Find nearest hospital using your location"
+                    style="margin-bottom:var(--space-3);width:100%;justify-content:center">
+                📍 Find Nearest Hospital
+            </button>
+            <div id="hospital-results" aria-live="polite" aria-label="Nearest hospital results">
+                <p style="font-size:var(--font-size-xs);color:var(--color-text-muted);text-align:center;padding:8px">
+                    Click above to find health facilities near you.
+                </p>
+            </div>
+        </div>
+
+        <!-- Quick helplines -->
+        <div class="sidebar-section">
+            <div class="sidebar-section-title">Emergency Helplines</div>
+            <div style="display:flex;flex-direction:column;gap:8px">
+                <a href="tel:108"
+                   style="display:flex;justify-content:space-between;align-items:center;
+                          padding:8px 12px;background:var(--color-emergency-50);
+                          border:1px solid var(--color-emergency-200);border-radius:var(--radius-lg);
+                          text-decoration:none;color:var(--color-emergency-700);font-size:var(--font-size-sm);
+                          font-weight:600;transition:var(--transition-fast)"
+                   aria-label="Call 108 - National Emergency Ambulance"
+                   id="helpline-108">
+                    <span>🚑 National Emergency</span>
+                    <span>108</span>
+                </a>
+                <a href="tel:1800-599-0019"
+                   style="display:flex;justify-content:space-between;align-items:center;
+                          padding:8px 12px;background:var(--color-primary-50);
+                          border:1px solid var(--color-primary-200);border-radius:var(--radius-lg);
+                          text-decoration:none;color:var(--color-primary-700);font-size:var(--font-size-sm);
+                          font-weight:600;transition:var(--transition-fast)"
+                   aria-label="Call KIRAN Mental Health Helpline 1800-599-0019"
+                   id="helpline-kiran">
+                    <span>🧠 KIRAN (Mental Health)</span>
+                    <span style="font-size:0.7rem">1800-599-0019</span>
+                </a>
+                <a href="tel:181"
+                   style="display:flex;justify-content:space-between;align-items:center;
+                          padding:8px 12px;background:var(--color-success-50);
+                          border:1px solid var(--color-success-200);border-radius:var(--radius-lg);
+                          text-decoration:none;color:var(--color-success-700);font-size:var(--font-size-sm);
+                          font-weight:600;transition:var(--transition-fast)"
+                   aria-label="Call Women's Helpline 181"
+                   id="helpline-women">
+                    <span>👩 Women's Helpline</span>
+                    <span>181</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- Scheme info card -->
+        <div class="sidebar-section">
+            <div class="sidebar-section-title">Government Schemes</div>
+            <div style="font-size:var(--font-size-xs);color:var(--color-text-secondary);line-height:1.6">
+                <p>🏥 <strong>Ayushman Bharat (PMJAY)</strong> — Free health cover up to ₹5 lakh</p>
+                <p style="margin-top:6px">💻 <strong>eSanjeevani</strong> — Free telemedicine consultation</p>
+                <p style="margin-top:6px">💊 <strong>Jan Aushadhi</strong> — Affordable generic medicines</p>
+                <a href="about.html"
+                   style="display:inline-block;margin-top:8px;font-size:var(--font-size-xs);
+                          color:var(--color-primary-600);font-weight:600">
+                    Learn more →
+                </a>
+            </div>
+        </div>
+
+        <!-- Clear chat button -->
+        <div class="sidebar-section" style="margin-top:auto">
+            <button id="clear-chat-btn"
+                    class="btn btn-secondary w-full"
+                    style="justify-content:center;color:var(--color-text-secondary)"
+                    aria-label="Clear conversation history">
+                🗑️ Clear Conversation
+            </button>
+        </div>
+
+    </aside>
+
+    <!-- ── CHAT AREA ─────────────────────────────────────────── -->
+    <main class="content-area" role="main" aria-label="Chat interface">
+        <div class="chat-container">
+
+            <!-- Messages area -->
+            <div class="messages-area"
+                 id="messages-area"
+                 role="log"
+                 aria-live="polite"
+                 aria-label="Conversation messages">
+
+                <!-- Welcome screen (hidden after first message) -->
+                <div class="welcome-screen" id="welcome-screen">
+                    <div class="welcome-icon" aria-hidden="true">🏥</div>
+                    <h1 class="welcome-title">SwasthyaSetu AI</h1>
+                    <p class="welcome-subtitle">
+                        Your multilingual health information companion.<br>
+                        Ask questions in Hindi, English, Tamil, Bengali, and 7 more Indian languages.
+                    </p>
+
+                    <!-- Suggested prompts -->
+                    <div class="suggested-prompts" role="list" aria-label="Suggested questions">
+                        <button class="prompt-chip"
+                                data-prompt="डेंगू बुखार के क्या लक्षण हैं और मुझे कब डॉक्टर के पास जाना चाहिए?"
+                                role="listitem"
+                                aria-label="Ask about dengue symptoms in Hindi">
+                            <span class="prompt-chip-icon" aria-hidden="true">🦟</span>
+                            <span class="prompt-chip-text">डेंगू बुखार के लक्षण क्या हैं? (Hindi)</span>
+                        </button>
+                        <button class="prompt-chip"
+                                data-prompt="What are the benefits of Ayushman Bharat PMJAY scheme and how do I register?"
+                                role="listitem"
+                                aria-label="Ask about Ayushman Bharat scheme">
+                            <span class="prompt-chip-icon" aria-hidden="true">🏥</span>
+                            <span class="prompt-chip-text">Ayushman Bharat scheme benefits</span>
+                        </button>
+                        <button class="prompt-chip"
+                                data-prompt="How can I prevent malaria during monsoon season in India?"
+                                role="listitem"
+                                aria-label="Ask about malaria prevention">
+                            <span class="prompt-chip-icon" aria-hidden="true">🌧️</span>
+                            <span class="prompt-chip-text">Prevent malaria in monsoon</span>
+                        </button>
+                        <button class="prompt-chip"
+                                data-prompt="eSanjeevani telemedicine se free doctor consultation kaise karein?"
+                                role="listitem"
+                                aria-label="Ask about eSanjeevani in Hinglish">
+                            <span class="prompt-chip-icon" aria-hidden="true">💻</span>
+                            <span class="prompt-chip-text">eSanjeevani free consultation</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Typing indicator -->
+                <div class="typing-indicator hidden" id="typing-indicator" aria-label="AI is thinking" role="status">
+                    <div class="message-avatar" aria-hidden="true">🩺</div>
+                    <div class="typing-dots" aria-hidden="true">
+                        <div class="typing-dot"></div>
+                        <div class="typing-dot"></div>
+                        <div class="typing-dot"></div>
+                    </div>
+                    <span class="text-muted text-sm" style="font-style:italic">SwasthyaSetu is thinking…</span>
+                </div>
+
+            </div>
+
+            <!-- Chat input area -->
+            <div class="chat-input-area">
+                <div class="input-toolbar" role="search" aria-label="Message input">
+                    <textarea
+                        id="chat-textarea"
+                        class="chat-textarea"
+                        placeholder="Ask a health question in any Indian language… (e.g. डेंगू के लक्षण, diabetes diet tips)"
+                        rows="1"
+                        maxlength="2000"
+                        aria-label="Type your health question"
+                        aria-multiline="true"
+                        autocomplete="off"
+                        spellcheck="true"
+                    ></textarea>
+
+                    <div class="input-actions">
+                        <!-- Mic button (voice input) -->
+                        <button class="mic-btn"
+                                id="mic-btn"
+                                aria-label="Start voice input"
+                                title="Click to speak your question">
+                            <!-- Mic SVG -->
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
+                                <path d="M19 10v2a7 7 0 0 1-14 0v-2H3v2a9 9 0 0 0 8 8.94V23h2v-2.06A9 9 0 0 0 21 12v-2h-2z"/>
+                            </svg>
+                            <div class="recording-indicator" aria-hidden="true"></div>
+                        </button>
+
+                        <!-- Send button -->
+                        <button class="send-btn"
+                                id="send-btn"
+                                aria-label="Send message"
+                                title="Send (or press Enter)">
+                            <!-- Send arrow SVG -->
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <line x1="22" y1="2" x2="11" y2="13"/>
+                                <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Character count + disclaimer -->
+                <div style="display:flex;justify-content:space-between;align-items:center;
+                            margin-top:6px;padding:0 4px">
+                    <span style="font-size:0.7rem;color:var(--color-text-muted)">
+                        Press Enter to send · Shift+Enter for new line · Tap 🎤 to speak
+                    </span>
+                    <span style="font-size:0.7rem;color:var(--color-text-muted)">
+                        ⚕️ Not medical advice
+                    </span>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+</div><!-- end .main-container -->
+
+<!-- ============================================================
+     JAVASCRIPT — ES6 modules
+     ============================================================ -->
+<script type="module">
+    import { initChat, sendMessage } from "./js/chat.js";
+    import { initLanguageSelector } from "./js/languageSelector.js";
+    import { startRecording, stopRecording, isRecording, onTranscription, isVoiceSupported } from "./js/voice.js";
+    import { findNearestHospitals } from "./js/hospitalFinder.js";
+    import { setInputText } from "./js/chat.js";
+
+    // ── Initialise modules ──────────────────────────────────
+    document.addEventListener("DOMContentLoaded", () => {
+
+        // Init chat
+        initChat();
+
+        // Init language selector dropdown
+        initLanguageSelector("language-select");
+
+        // Init voice — bind mic button
+        const micBtn = document.getElementById("mic-btn");
+        if (micBtn) {
+            if (!isVoiceSupported()) {
+                micBtn.style.display = "none";
+            } else {
+                onTranscription((text) => {
+                    setInputText(text);
+                    // Auto-send after transcription
+                    sendMessage();
+                });
+
+                micBtn.addEventListener("click", () => {
+                    if (isRecording()) {
+                        stopRecording(micBtn);
+                    } else {
+                        startRecording(micBtn);
+                    }
+                });
+            }
+        }
+
+        // Init hospital finder button
+        document.getElementById("find-hospitals-btn")?.addEventListener("click", () => {
+            findNearestHospitals("hospital-results");
+        });
+
+        // Mobile sidebar toggle
+        const hamburgerBtn = document.getElementById("hamburger-btn");
+        const sidebar = document.getElementById("sidebar");
+        const overlay = document.getElementById("sidebar-overlay");
+
+        function toggleSidebar() {
+            const isOpen = sidebar.classList.contains("open");
+            sidebar.classList.toggle("open", !isOpen);
+            overlay.classList.toggle("visible", !isOpen);
+            hamburgerBtn.setAttribute("aria-expanded", String(!isOpen));
+        }
+
+        hamburgerBtn?.addEventListener("click", toggleSidebar);
+        overlay?.addEventListener("click", toggleSidebar);
+
+        // Close sidebar on Escape
+        document.addEventListener("keydown", (e) => {
+            if (e.key === "Escape" && sidebar.classList.contains("open")) {
+                toggleSidebar();
+            }
+        });
+
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,155 @@
+/*
+ * frontend/css/variables.css
+ * ===========================
+ * Design token system for SwasthyaSetu AI.
+ *
+ * Color philosophy:
+ * ─────────────────
+ * This is deliberately a LIGHT, CLEAN, TRUSTWORTHY healthcare UI — not a
+ * dark Netflix-style theme. Healthcare UX research consistently shows that
+ * light interfaces with high contrast build more trust for medical information,
+ * particularly among lower-literacy and older users in rural/semi-urban India.
+ *
+ * Color assignments:
+ * - Primary blue: calming, trustworthy, medical
+ * - Green accents: "safe", "informational", positive health actions
+ * - Red/orange: RESERVED EXCLUSIVELY for emergency alerts and warnings
+ * - White/light grey: clean background, high legibility
+ */
+
+:root {
+    /* ── Primary brand palette ────────────────────────────────────── */
+    --color-primary-50:  #f0f9ff;
+    --color-primary-100: #e0f2fe;
+    --color-primary-200: #bae6fd;
+    --color-primary-300: #7dd3fc;
+    --color-primary-400: #38bdf8;
+    --color-primary-500: #0ea5e9;
+    --color-primary-600: #0284c7;    /* Main brand color — medical blue */
+    --color-primary-700: #0369a1;
+    --color-primary-800: #075985;
+    --color-primary-900: #0c4a6e;
+
+    /* ── Semantic green (health positive / safe) ──────────────────── */
+    --color-success-50:  #f0fdf4;
+    --color-success-100: #dcfce7;
+    --color-success-200: #bbf7d0;
+    --color-success-500: #22c55e;
+    --color-success-600: #16a34a;
+    --color-success-700: #15803d;
+
+    /* ── Emergency red (ONLY for alerts) ─────────────────────────── */
+    --color-emergency-50:  #fff1f2;
+    --color-emergency-100: #ffe4e6;
+    --color-emergency-200: #fecdd3;
+    --color-emergency-400: #fb7185;
+    --color-emergency-500: #f43f5e;
+    --color-emergency-600: #e11d48;
+    --color-emergency-700: #be123c;
+    --color-emergency-800: #9f1239;
+
+    /* ── Warning amber (non-emergency caution) ────────────────────── */
+    --color-warning-100: #fef3c7;
+    --color-warning-400: #fbbf24;
+    --color-warning-600: #d97706;
+
+    /* ── Neutral greys ────────────────────────────────────────────── */
+    --color-neutral-0:   #ffffff;
+    --color-neutral-50:  #f8fafc;
+    --color-neutral-100: #f1f5f9;
+    --color-neutral-200: #e2e8f0;
+    --color-neutral-300: #cbd5e1;
+    --color-neutral-400: #94a3b8;
+    --color-neutral-500: #64748b;
+    --color-neutral-600: #475569;
+    --color-neutral-700: #334155;
+    --color-neutral-800: #1e293b;
+    --color-neutral-900: #0f172a;
+
+    /* ── Semantic aliases ─────────────────────────────────────────── */
+    --color-bg:              var(--color-neutral-50);
+    --color-bg-card:         var(--color-neutral-0);
+    --color-bg-sidebar:      var(--color-primary-900);
+    --color-border:          var(--color-neutral-200);
+    --color-border-focus:    var(--color-primary-500);
+    --color-text-primary:    var(--color-neutral-800);
+    --color-text-secondary:  var(--color-neutral-500);
+    --color-text-muted:      var(--color-neutral-400);
+    --color-text-on-primary: var(--color-neutral-0);
+
+    /* ── Typography ────────────────────────────────────────────────── */
+    --font-family-sans: 'Inter', 'Noto Sans', system-ui, -apple-system,
+                        BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --font-family-mono: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+
+    /* Devanagari + Tamil + other Indic scripts support */
+    --font-family-indic: 'Noto Sans Devanagari', 'Noto Sans Tamil',
+                         'Noto Sans Telugu', 'Noto Sans Bengali',
+                         var(--font-family-sans);
+
+    --font-size-xs:   0.75rem;   /* 12px */
+    --font-size-sm:   0.875rem;  /* 14px */
+    --font-size-base: 1rem;      /* 16px */
+    --font-size-md:   1.125rem;  /* 18px */
+    --font-size-lg:   1.25rem;   /* 20px */
+    --font-size-xl:   1.5rem;    /* 24px */
+    --font-size-2xl:  1.875rem;  /* 30px */
+    --font-size-3xl:  2.25rem;   /* 36px */
+
+    --font-weight-normal:   400;
+    --font-weight-medium:   500;
+    --font-weight-semibold: 600;
+    --font-weight-bold:     700;
+
+    --line-height-tight:  1.25;
+    --line-height-normal: 1.5;
+    --line-height-relaxed: 1.75;
+
+    /* ── Spacing scale ─────────────────────────────────────────────── */
+    --space-1:  0.25rem;
+    --space-2:  0.5rem;
+    --space-3:  0.75rem;
+    --space-4:  1rem;
+    --space-5:  1.25rem;
+    --space-6:  1.5rem;
+    --space-8:  2rem;
+    --space-10: 2.5rem;
+    --space-12: 3rem;
+    --space-16: 4rem;
+    --space-20: 5rem;
+
+    /* ── Border radius ─────────────────────────────────────────────── */
+    --radius-sm:   0.25rem;
+    --radius-md:   0.5rem;
+    --radius-lg:   0.75rem;
+    --radius-xl:   1rem;
+    --radius-2xl:  1.5rem;
+    --radius-full: 9999px;
+
+    /* ── Shadows ───────────────────────────────────────────────────── */
+    --shadow-xs:  0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --shadow-sm:  0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+    --shadow-md:  0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    --shadow-lg:  0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    --shadow-xl:  0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+    --shadow-emergency: 0 0 0 3px var(--color-emergency-200), 0 4px 12px rgb(225 29 72 / 0.3);
+
+    /* ── Transitions ───────────────────────────────────────────────── */
+    --transition-fast:   all 0.15s ease;
+    --transition-normal: all 0.25s ease;
+    --transition-slow:   all 0.4s ease;
+
+    /* ── Z-index scale ─────────────────────────────────────────────── */
+    --z-base:    1;
+    --z-sticky:  100;
+    --z-overlay: 200;
+    --z-modal:   300;
+    --z-toast:   400;
+
+    /* ── Layout ────────────────────────────────────────────────────── */
+    --max-width-content: 800px;
+    --navbar-height: 64px;
+    --disclaimer-height: 48px;
+    --sidebar-width: 280px;
+    --chat-input-height: 80px;
+}

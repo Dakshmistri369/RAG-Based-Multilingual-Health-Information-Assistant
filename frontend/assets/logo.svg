@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 60" width="200" height="60">
+  <defs>
+    <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0284c7;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0ea5e9;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Icon background -->
+  <rect x="4" y="4" width="52" height="52" rx="12" fill="url(#logoGrad)" />
+
+  <!-- Health cross -->
+  <rect x="23" y="14" width="14" height="32" rx="3" fill="white" />
+  <rect x="14" y="23" width="32" height="14" rx="3" fill="white" />
+
+  <!-- Text: SwasthyaSetu AI -->
+  <text x="68" y="28" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="700" fill="#0284c7" letter-spacing="-0.3">
+    SwasthyaSetu
+  </text>
+  <text x="68" y="46" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="400" fill="#64748b" letter-spacing="0.5">
+    AI Health Assistant
+  </text>
+</svg>
